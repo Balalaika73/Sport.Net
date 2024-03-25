@@ -1,0 +1,176 @@
+﻿@model Sport.Models.MainPage
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link href="~/css/site.css" rel="stylesheet" />
+    <script>
+        window.addEventListener('scroll', function () {
+            var header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+        function getSelectedRadioValue() {
+            var radios = document.getElementsByName('r');
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    return radios[i].id;
+                }
+            }
+            return null;
+        }
+
+        function displayRoomName() {
+            var selectedRadio = getSelectedRadioValue();
+            var roomName = document.getElementById(selectedRadio).getAttribute('data-room-name');
+            var roomInfo = document.getElementById(selectedRadio).getAttribute('data-room-info');
+            document.getElementById('roomName').innerText = roomName;
+            document.getElementById('roomInfo').innerText = roomInfo;
+            document.getElementById('roomName').classList.add('fade-in');
+            document.getElementById('roomInfo').classList.add('fade-in');
+        }
+    </script>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <header class="head">
+        <nav>
+            <ul class="head_links">
+                <li><a href="#" id="about-us">О НАС</a></li>
+                <li><a href="#" id="price-link">ТАРИФЫ</a></li>
+                <li><a href="#">КЛУБЫ</a></li>
+                <li><a href="#">РАСПИСАНИЕ</a></li>
+            </ul>
+        </nav>
+        <nav class="authUser">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="/Home/Profile">@User.Identity.Name</a>
+            }
+        </nav>
+    </header>
+
+    <div class="main_fit">
+        <div class="slider middle">
+            <div class="sliders">
+                <input type="radio" name="r" id="r1" data-room-name="@Model.typeRooms.Single(r => r.IdTypeRoom == 1).NameRoom" data-room-info="@Model.typeRooms.Single(r => r.IdTypeRoom == 1).TypeRoomInfo" checked />
+                <input type="radio" name="r" id="r2" data-room-name="@Model.typeRooms.Single(r => r.IdTypeRoom == 2).NameRoom" data-room-info="@Model.typeRooms.Single(r => r.IdTypeRoom == 2).TypeRoomInfo" />
+                <input type="radio" name="r" id="r3" data-room-name="@Model.typeRooms.Single(r => r.IdTypeRoom == 3).NameRoom" data-room-info="@Model.typeRooms.Single(r => r.IdTypeRoom == 3).TypeRoomInfo" />
+
+                @foreach (var item in Model.typeRooms)
+                {
+                    <div class="slide s1">
+                        <img src="/Img/@item.TypeRoomPhoto" alt="">
+                        <script>console.log('@item.TypeRoomPhoto');</script>
+                    </div>
+                }
+            </div>
+            <div class="navigation">
+                <label for="r1" class="bar"></label>
+                <label for="r2" class="bar"></label>
+                <label for="r3" class="bar"></label>
+            </div>
+        </div>
+        <div class="main_fit_txt fade-in">
+            <div class="room_name" id="roomName">
+                @Model.typeRooms.Single(r => r.IdTypeRoom == 1).NameRoom
+            </div>
+            <div class="room_info" id="roomInfo">
+                @Model.typeRooms.Single(r => r.IdTypeRoom == 1).TypeRoomInfo
+            </div>
+        </div>
+    </div>
+
+    <div class="price-body">
+        <div class="background-image"></div>
+        <div class="centered-text">
+            СДЕЛАЙ ПРАВИЛЬНЫЙ ВЫБОР
+        </div>
+        <div class="wrapper-price">
+            @foreach (var item in Model.typeAbonements)
+            {
+                <div class="single-price">
+                    <h1>@item.NameType</h1>
+                    <div class="price">
+                        <span id="priceValue">@item.PriceType * 31</span>
+                    </div>
+                    <div class="price-info">
+                        @item.TypeDiscription
+                    </div>
+                    <a href=#>Выбрать</a>
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+    <script>
+        displayRoomName();
+
+        var radios = document.getElementsByName('r');
+        radios.forEach(function (radio) {
+            radio.addEventListener('change', function () {
+                displayRoomName();
+            });
+        });
+    </script>
+    <script>
+        var modal = document.getElementById('login-form');
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    <script>
+        var prices = document.querySelectorAll('.price');
+        prices.forEach(function (price) {
+            var priceValue = price.querySelector('#priceValue').innerText;
+            var result = eval(priceValue); // Выполняем умножение
+            price.querySelector('#priceValue').innerText = result + " ₽"; // Заменяем значение в HTML
+        });
+        document.getElementById("price-link").addEventListener("click", function (event) {
+            event.preventDefault(); // Предотвращаем переход по ссылке
+            var priceBody = document.querySelector(".price-body");
+            priceBody.scrollIntoView({ behavior: "smooth" }); // Прокручиваем к элементу
+        });
+        document.getElementById("about-us").addEventListener("click", function (event) {
+            event.preventDefault(); // Предотвращаем переход по ссылке
+            var main = document.querySelector(".main_fit");
+            var scrollOffset = 52.6667; // Дополнительное смещение
+            var scrollToPosition = main.offsetTop - scrollOffset;
+            window.scrollTo({ top: scrollToPosition, behavior: "smooth" }); // Прокручиваем страницу
+        });
+
+        function closeModal() {
+            var loginForm = document.getElementById('login-form');
+            var registrationForm = document.getElementById('registration-form');
+
+            loginForm.style.display = "none";
+            registrationForm.style.display = "none";
+        }
+
+        function openRegistration() {
+            var loginForm = document.getElementById('login-form');
+            var registrationForm = document.getElementById('registration-form');
+
+            loginForm.style.display = 'none';
+            registrationForm.style.display = 'block';
+        }
+
+        var registrationModal = document.getElementById('registration-form');
+        window.onclick = function (event) {
+            if (event.target == registrationModal) {
+                closeModal();
+            }
+        }
+    </script>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

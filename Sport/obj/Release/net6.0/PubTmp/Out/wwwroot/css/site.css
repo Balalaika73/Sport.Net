@@ -1,0 +1,746 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Sofia+Sans+Condensed:wght@200&display=swap');
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    background: #2C115E;
+    margin-bottom: 0;
+    margin: 0;
+    font-family: 'PT Sans', sans-serif;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+li, a, button {
+    font-family: 'PT Sans', sans-serif;
+    font-weight: 200;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2C115E;
+    margin-right: 8px;
+}
+
+.head {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 900;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.head_links {
+    list-style: none;
+}
+
+.head_links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+    .head_links li a {
+        transition: all 0.3s ease 0s;
+        position: relative;
+    }
+
+    .head_links li a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.head_links li a:hover::before {
+    transform: scaleX(1);
+}
+
+.btnLogin-popup {
+    color: #2C115E;
+    background-color: #C5F770;
+    border-radius: 100px;
+    border: none;
+    transition: all 0.3s ease 0s;
+    height: 40px;
+    width: auto;
+    padding: 0 15px;
+    margin-right: 15px;
+}
+
+.authUser a {
+    font-size: 20px;
+    margin-right: 15px;
+    position: relative;
+    transition: font-size 0.3s ease, color 0.3s ease, font-weight 0.1s ease;
+}
+
+.authUser:hover a {
+    font-size: 21px;
+    color: #C5F770; /* Замените на желаемый цвет */
+    font-weight: bold;
+}
+
+
+
+
+
+.slider {
+    width: 50%;
+    overflow: hidden;
+    height: calc(100vh - 52.6667px);
+    border: none;
+    z-index: 100;
+}
+
+.middle {
+    position: absolute;
+}
+
+.navigation {
+    position: absolute;
+    bottom:16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+.bar {
+    height: 8px;
+    width: 30px;
+    cursor: pointer;
+    margin: 6px;
+    background-color: #68cb8a;
+    opacity: .5;
+    border-radius: 10px;
+    transition: all .4s ease;
+}
+
+.bar:hover {
+    opacity:0.8;
+    transform:scale(1.1);
+}
+
+input[name="r"] {
+    position: absolute;
+    visibility: hidden;
+}
+
+.sliders {
+    width: 400%;
+    height: 100%;
+    display: flex;
+}
+
+
+.slide img {
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    width: 25%;
+    transition: all 0.6s ease;
+}
+
+#r1:checked ~ .s1 {
+    transform: translateX(0%);
+}
+
+#r2:checked ~ .s1 {
+    transform: translateX(-100%);
+}
+
+#r3:checked ~ .s1 {
+    transform: translateX(-200%);
+}
+
+
+img {
+    border: none;
+}
+
+:root {
+    --index: calc(1vw + 1vh);
+}
+
+.main_fit {
+    width: 100%;
+    overflow: hidden;
+    height: calc(100vh - 52.6667px);
+    margin-top: 52.667px;
+    border: none;
+}
+
+.main_fit_txt {
+    width: 50%;
+    overflow: hidden;
+    height: calc(100vh - 52.6667px);
+    margin-right: -10px;
+    border: none;
+    float: right;
+    color: white;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.room_name {
+    font-size: 35px;
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.room_info {
+    font-size: 20px;
+    width: 80%;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    text-align: justify;
+}
+.fade-in {
+    opacity: 0;
+    animation: fade-in-animation 0.55s ease-out 0.5s forwards;
+}
+
+@keyframes fade-in-animation {
+    100% {
+        opacity: 1;
+    }
+}
+
+.main-wrapper {
+    justify-content: center;
+    align-items: center;
+    margin-top: 52.667px;
+    width: 100%;
+    height: calc(100vh - 52.6667px);
+    display: flex;
+}
+
+.wrapper {
+    position: absolute;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid #C5F770;
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: translate(-50%, -50%); /* Изменено */
+    left: 50%;
+    top: 50%;
+    z-index: 999;
+    transition: transform .5s ease, height .2s ease;
+}
+
+.wrapper-reg {
+    position: absolute;
+    width: 800px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid #C5F770;
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: translate(-50%, -50%); /* Изменено */
+    left: 50%;
+    top: 50%;
+    z-index: 999;
+    transition: transform .5s ease, height .2s ease;
+    flex-direction: row; /* Добавлено */
+    align-items: center;
+}
+
+
+.wrapper .form-box {
+    width: 100%;
+    padding: 40px;
+}
+
+.wrapper.active .form-box {
+    transition: none;
+    transform: translateX(-400px);
+}
+
+.wrapper .form-box.login {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+
+.wrapper.active .form-box.register {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.wrapper .icon-close {
+    position:absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    font-size: 2em;
+    color: #C5F770;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.form-box h2 {
+    font-size: 2em;
+    color: white;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #68cb8a;
+    margin: 30px 0;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #68cb8a;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+}
+
+#inp-email:focus ~ label,
+#inp-email:valid ~ label {
+    top: -5px;
+}
+
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: white;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.btn {
+    width: 100%;
+    color: #2C115E;
+    background-color: #C5F770;
+    border-radius: 100px;
+    border: none;
+    transition: all 0.3s ease 0s;
+    height: 40px;
+    padding: 0 15px;
+}
+
+.login-register {
+    font-size: .9em;
+    color: #68cb8a;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a {
+    color: #C5F770;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
+}
+
+#login-form {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+}
+
+#registration-form {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+}
+
+.wrapper-reg h2 {
+    font-size: 2em;
+    color: white;
+    text-align: center;
+}
+
+.input-column {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+    .input-column:last-child {
+        margin-right: 0;
+    }
+
+.input-box {
+    margin-bottom: 20px;
+}
+
+
+
+
+.price-body {
+    width: 100%;
+    height: calc(100vh - 52.6667px);
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to bottom, #4e318e 0%, #4e318e 50%, #2C115E 50%, #2C115E 100%);
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.background-image {
+    position: absolute;
+    width: calc(100% - 15px); /* Добавлено */
+    height: 48vh; /* Добавлено */
+    background-image: url(/Img/price.jpg); /* Замените путь_к_фотографии на реальный путь к изображению */
+    background-position: center;
+    background-size: cover;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0.5;
+    overflow: hidden;
+}
+
+.centered-text {
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'PT Sans', sans-serif;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    z-index: 10;
+    font-size: 35px;
+}
+
+.wrapper-price {
+    font-family: 'PT Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+.single-price {
+    width: 18%;
+    height: calc(50vh - 52.6667px);
+    background: #5c6ba2;
+    float: left;
+    box-shadow: 1px 1px 20px rgba(0,0,0,0.5);
+    text-align: center;
+    transition: 0.9s;
+    margin-right: 2%; /* Добавлен правый отступ */
+    margin-left: 2%; /* Добавлен левый отступ */
+    z-index: 2;
+    position: relative;
+}
+.price {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #C5F770;
+    margin: 5% auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.price-info {
+    margin-top: 15%;
+}
+
+.single-price h1 {
+    font-size: 29px;
+    color: #C5F770;
+    line-height: 3;
+    text-transform: uppercase;
+}
+
+.price {
+    font-size: 38px;
+    color: white;
+}
+
+.price-info {
+    font-size: 25px;
+    font-weight: normal;
+    text-align: center;
+    color: #C5F770;
+    line-height: 1;
+}
+
+.single-price:hover {
+    background: #68cb8a;
+    box-shadow: 0 0 15px rgba(0,0,0,1);
+    transform: scale(1.1);
+    z-index: 1;
+    border-radius: 25px;
+}
+
+.single-price:hover .price {
+    border-color: #2C115E;
+    color: white;
+}
+
+.single-price:hover .price-info {
+    color: #2C115E;
+}
+
+.single-price a {
+    text-decoration: none;
+    background: #2C115E;
+    color: #C5F770;
+    padding: 10px 60px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10%;
+    position: absolute; /* Добавлено */
+    bottom: 20px; /* Добавлено */
+    left: 50%; /* Добавлено */
+    transform: translateX(-50%); /* Добавлено */
+}
+
+.single-price:hover a {
+    color: #C5F770;
+}
+
+.single-price:hover h1 {
+    color: #2C115E;
+}
+
+.index-body-prof {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: initial;
+    flex: 1 1 100%;
+}
+
+.profile-block {
+    height: 85%;
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+    pointer-events: initial;
+    display: flex;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+.profile-block-bck {
+    position: relative;
+    background: #0b0b0b;
+    text-align: center;
+    height: 75%;
+    width: 75%;
+    box-sizing: border-box;
+    display: flex;
+    line-height: 150%;
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent;
+    border-radius: 5%;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #C5F770;
+}
+
+.profile-img {
+    margin-top: 5%;
+    border-radius: 50%;
+    height: 30%;
+    color: #
+}
+
+.profile-name {
+    font-size: 180%;
+    text-align: center;
+    margin-top: 4%;
+    color: white;
+}
+
+.profile-gmail {
+    font-size: 130%;
+    text-align: center;
+    color: #9c9e9d;
+    margin-top: 1%;
+}
+
+.profile-phone {
+    font-size: 135%;
+    text-align: left;
+    margin-left: 2%;
+    color: #9c9e9d;
+    width: 50%;
+}
+
+.profile-phone-number {
+    font-size: 135%;
+    text-align: center;
+    color: white;
+    width: 50%;
+}
+
+.profile-count {
+    font-size: 100%;
+    text-align: center;
+    color: white;
+    width: 50%;
+    padding-top: 5%;
+}
+
+.profile-info {
+    color: white;
+    width: 100%;
+    margin-top: 3%;
+    flex-direction: row;
+    display: flex;
+}
+
+.edit-profile-btn {
+    margin-top: 10%;
+    background-color: #771647;
+    font-size: 90%;
+    color: white;
+    border: 2px solid #771647;
+    border-radius: 10px;
+    padding: 10px;
+    text-decoration: none;
+    transition: all .1s ease-in-out;
+}
+
+.logout {
+    position: absolute;
+    bottom: 30px; /* Устанавливаем отступ снизу */
+    left: 50%; /* Центрируем кнопку горизонтально */
+    transform: translateX(-50%); /* Центрируем кнопку точно по центру */
+    font-size: 30px;
+    color: #2C115E;
+    background-color: #C5F770;
+    border-radius: 100px;
+    border: none;
+    transition: all 0.3s ease 0s;
+    height: 40px;
+    padding: 0 15px;
+}
+
+.editbtn {
+    bottom: 100px; /* Устанавливаем отступ снизу */
+    font-size: 20px;
+}
+
+.input-box-profile {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+    .input-box-profile input {
+        width: 100%;
+        height: 30px;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid #68cb8a;
+        outline: none;
+        font-size: 1em;
+        color: white;
+        font-weight: 600;
+        padding: 5px;
+    }
+
+    .input-box-profile label {
+        position: absolute;
+        top: -10px;
+        left: 5px;
+        font-size: 0.8em;
+        color: #68cb8a;
+        font-weight: 500;
+        pointer-events: none;
+        transition: .5s;
+    }
+
+    .input-box-profile input:focus ~ label,
+    .input-box-profile input:valid ~ label {
+        top: -25px;
+        font-size: 0.7em;
+    }
+
+.logout.save-button {
+    margin-top: 20px;
+    background-color: #68cb8a;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .logout.save-button:hover {
+        background-color: #56b97d;
+    }
+
+.profile-img-edit {
+    margin-top: 5%;
+    border-radius: 50%;
+    height: 20%;
+}

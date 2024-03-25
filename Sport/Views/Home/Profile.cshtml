@@ -1,0 +1,221 @@
+﻿@model Sport.Models.ProfilePage
+@{
+    Layout = null;
+}
+<style>
+    body {
+        margin-left: 15px;
+        margin-right: 15px;
+        overflow: hidden;
+    }
+</style>
+<html>
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Modak" rel="stylesheet" />
+    <title>Профиль</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <style>
+        #edit-form {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="head">
+        <nav>
+            <ul class="head_links">
+                <li>@Html.ActionLink("< Назад","AuthIndex")</li>
+            </ul>
+        </nav>
+        <nav>
+            <form action="@Url.Action("LogOut")">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btnLogin-popup" style="top: 7px;
+    position: relative;">
+                    Выход
+                </button>
+            </form>
+        </nav>
+    </header>
+    <form asp-action="EditProfile" asp-controller="Home" id="edit-form" method="post">
+        <div class="index-body-prof">
+            <div class="profile-block">
+                <div class="profile-block-bck">
+                    @if (Model.role.NameRole == "Тренер")
+                    {
+                        <img src="@Model.trainer.PhotoTrainer" class="profile-img-edit" />
+                    }
+                    else
+                    {
+                        <img src="~/Img/profile.jpg" class="profile-img-edit" />
+                    }
+                    <div class="profile-info">
+                        <div class="profile-phone">
+                            Фамилия:
+                        </div>
+                        <div class="input-box-profile">
+                            <input type="hidden" asp-for="user.IdUser" />
+                            <input asp-for="@Model.user.SurUser" placeholder="Фамилия" />
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-phone">
+                            Имя:
+                        </div>
+                        <div class="input-box-profile">
+                            <input asp-for="@Model.user.NameUser" placeholder="Имя" />
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-phone">
+                            Отчество:
+                        </div>
+                        <div class="input-box-profile">
+                            <input asp-for="@Model.user.MiddleUser" placeholder="Отчество" />
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-phone">
+                            Дата рождения:
+                        </div>
+                        <div class="input-box-profile">
+                            <input asp-for="@Model.user.BdUser" placeholder="dd.mm.yyyy" class="profile-birth-date" type="date" />
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-phone">
+                            E-mail:
+                        </div>
+                        <div class="input-box-profile">
+                            <input asp-for="@Model.user.EmailUser" placeholder="E-mail" />
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-phone">
+                            Номер телефона:
+                        </div>
+                        <div class="input-box-profile" >
+                            <input type="text" id="phoneNumberInput" name="phoneNumberInput" placeholder="+7(xxx)xxx-xx-xx">
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-phone">
+                            Пароль:
+                        </div>
+                        <div class="input-box-profile">
+                            <input asp-for="@Model.user.PassUser" placeholder="Пароль" />
+                        </div>
+                    </div>
+                    <button type="submit" class="logout save-button">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+        <div class="index-body-prof">
+            <div class="profile-block">
+                <div class="profile-block-bck">
+                    @if (Model.role.NameRole == "Тренер")
+                    {
+                        <img src="@Model.trainer.PhotoTrainer" class="profile-img" />
+                    }
+                    else
+                    {
+                        <img src="~/Img/profile.jpg" class="profile-img" />
+                    }
+
+                    <div class="profile-name">
+                        @Model.user.NameUser @Model.user.SurUser @Model.user.MiddleUser
+                    </div>
+                    <div class="profile-gmail">
+                        @User.Identity.Name
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-phone">
+                            Номер телефона:
+                        </div>
+                        <div class="profile-phone-number">
+                            @Model.user.PhoneNumb
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-phone">
+                            Роль:
+                        </div>
+                        <div class="profile-phone-number">
+                            @Model.role.NameRole
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-phone">
+                            Дата рождения:
+                        </div>
+                        <div class="profile-phone-number">
+                            @Model.user.BdUser.ToString("dd.MM.yyyy")
+                        </div>
+                    </div>
+                    @if (Model.abonement != null && Model.abonement.FinishDate >= DateTime.Today)
+                    {
+                        <div class="profile-info">
+                            <div class="profile-phone">
+                                Абонемент:
+                            </div>
+                            <div class="profile-phone-number">
+                                @Model.abonement.TypeAbon.NameType
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-phone">
+                                Период абонемента:
+                            </div>
+                            <div class="profile-phone-number">
+                                @Model.abonement.StartDate.ToString("dd.MM.yyyy") - @Model.abonement.FinishDate.ToString("dd.MM.yyyy")
+                            </div>
+                        </div>
+                    }
+                    else {
+                        <div class="profile-info">
+                            <div class="profile-phone">
+                                Абонемент:
+                            </div>
+                            <div class="profile-phone-number">
+                                -
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-phone">
+                                Период абонемента:
+                            </div>
+                            <div class="profile-phone-number">
+                                -
+                            </div>
+                        </div>
+                    }
+                <button type="submit" class="logout" id="edit-button">
+                            Редактировать
+                    </button>
+                </div>
+            </div>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/inputmask/dist/inputmask/inputmask.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/inputmask/dist/inputmask/inputmask.binding.min.js"></script>
+
+
+    <script>
+        var editButton = document.getElementById('edit-button');
+        var editForm = document.getElementById('edit-form');
+
+        editButton.addEventListener('click', function (event) {
+            event.preventDefault(); // Предотвращает отправку формы по умолчанию
+            editForm.style.display = 'block';
+        });
+        $(document).ready(function () {
+            Inputmask({ mask: '+9(999)999-99-99' }).mask('#phoneNumberInput');
+        });
+        console.log("@Model.user.IdUser");
+    </script>
+</body>
+</html>
